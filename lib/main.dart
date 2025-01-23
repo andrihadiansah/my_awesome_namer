@@ -1,6 +1,7 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -168,7 +169,8 @@ class GeneratorPage extends StatelessWidget {
     } else {
       icon = Icons.favorite_border;
     }
-
+    final websiteUrl =
+        Uri.parse('https://github.com/andrihadiansah/my_awesome_namer');
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -197,6 +199,20 @@ class GeneratorPage extends StatelessWidget {
                 },
                 child: Text('Next'),
               ),
+            ],
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('Created By:'),
+              SizedBox(width: 10),
+              ElevatedButton(
+                onPressed: () {
+                  launchUrl(websiteUrl);
+                },
+                child: Text('Andri Hadiansah'),
+              )
             ],
           ),
           Spacer(flex: 2),

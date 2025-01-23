@@ -1,7 +1,7 @@
 import 'package:english_words/english_words.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/link.dart';
 
 void main() {
   runApp(MyApp());
@@ -169,8 +169,6 @@ class GeneratorPage extends StatelessWidget {
     } else {
       icon = Icons.favorite_border;
     }
-    final websiteUrl =
-        Uri.parse('https://github.com/andrihadiansah/my_awesome_namer');
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -205,13 +203,43 @@ class GeneratorPage extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Created By:'),
-              SizedBox(width: 10),
-              ElevatedButton(
-                onPressed: () {
-                  launchUrl(websiteUrl);
+              Text('Handcrafted by:'),
+              Link(
+                target: LinkTarget.blank,
+                uri: Uri.parse('https://andrihadiansah.vercel.app/'),
+                builder: (context, followLink) {
+                  return TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.blue,
+                      textStyle:
+                          TextStyle(decoration: TextDecoration.underline),
+                    ),
+                    onPressed: followLink,
+                    child: Text('Andri Hadiansah'),
+                  );
                 },
-                child: Text('Andri Hadiansah'),
+              )
+            ],
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text('The source code is available on'),
+              Link(
+                target: LinkTarget.blank,
+                uri: Uri.parse(
+                    'https://github.com/andrihadiansah/my_awesome_namer'),
+                builder: (context, followLink) {
+                  return TextButton(
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.blue,
+                      textStyle:
+                          TextStyle(decoration: TextDecoration.underline),
+                    ),
+                    onPressed: followLink,
+                    child: Text('GitHub'),
+                  );
+                },
               )
             ],
           ),
